@@ -1,0 +1,87 @@
+{
+ "doctype": "DocType",
+ "name": "Resource Booking",
+ "module": "Resort Booking",
+ "custom": 0,
+ "engine": "InnoDB",
+ "autoname": "format:RES-{YYYY}-{#####}",
+ "field_order": [
+  "resource",
+  "booking",
+  "status",
+  "column_break_4",
+  "slot_date",
+  "slot_start_time",
+  "slot_end_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "resource",
+   "fieldtype": "Link",
+   "label": "Resource",
+   "options": "Resort Resource",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "booking",
+   "fieldtype": "Link",
+   "label": "Room Booking",
+   "options": "Resort Booking",
+   "reqd": 1,
+   "in_list_view": 1,
+   "description": "The room reservation this activity slot is linked to"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Booked\nCancelled",
+   "default": "Booked",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "slot_date",
+   "fieldtype": "Date",
+   "label": "Slot Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "slot_start_time",
+   "fieldtype": "Time",
+   "label": "Slot Start Time",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "slot_end_time",
+   "fieldtype": "Time",
+   "label": "Slot End Time",
+   "reqd": 1,
+   "in_list_view": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Resort Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Receptionist",
+   "read": 1, "write": 1, "create": 1, "delete": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

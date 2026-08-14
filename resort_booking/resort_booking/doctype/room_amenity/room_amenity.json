@@ -1,0 +1,22 @@
+{
+ "doctype": "DocType",
+ "name": "Room Amenity",
+ "module": "Resort Booking",
+ "custom": 0,
+ "istable": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "amenity"
+ ],
+ "fields": [
+  {
+   "fieldname": "amenity",
+   "fieldtype": "Link",
+   "label": "Amenity",
+   "options": "Amenity",
+   "reqd": 1,
+   "in_list_view": 1
+  }
+ ],
+ "permissions": []
+}

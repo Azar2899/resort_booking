@@ -1,9 +1,9 @@
 [project]
 name = "resort_booking"
 authors = [
-    { name = "Azar2899", email = "azar.m.90804@gmail.com"}
+    { name = "Prithivraj Thangadurai", email = "prithivrajthangadurai@gmail.com"}
 ]
-description = "Frappe/ERPNext Resort Booking System"
+description = "Resort Booking Management System"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]

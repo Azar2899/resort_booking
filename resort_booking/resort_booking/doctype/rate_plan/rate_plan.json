@@ -1,0 +1,75 @@
+{
+ "doctype": "DocType",
+ "name": "Rate Plan",
+ "module": "Resort Booking",
+ "custom": 0,
+ "engine": "InnoDB",
+ "autoname": "hash",
+ "field_order": [
+  "room_type",
+  "plan_name",
+  "column_break_3",
+  "from_date",
+  "to_date",
+  "rate_per_night"
+ ],
+ "fields": [
+  {
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "label": "Room Type",
+   "options": "Room Type",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "plan_name",
+   "fieldtype": "Data",
+   "label": "Plan Name",
+   "description": "e.g. Summer Season, Festival Rate",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "rate_per_night",
+   "fieldtype": "Currency",
+   "label": "Rate Per Night",
+   "reqd": 1,
+   "in_list_view": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Resort Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Receptionist",
+   "read": 1
+  }
+ ],
+ "sort_field": "from_date",
+ "sort_order": "DESC"
+}

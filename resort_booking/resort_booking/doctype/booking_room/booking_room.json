@@ -1,0 +1,47 @@
+{
+ "doctype": "DocType",
+ "name": "Booking Room",
+ "module": "Resort Booking",
+ "custom": 0,
+ "istable": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "room",
+  "rate_per_night",
+  "nights",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "Room",
+   "options": "Room",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "rate_per_night",
+   "fieldtype": "Currency",
+   "label": "Rate Per Night",
+   "read_only": 1,
+   "in_list_view": 1,
+   "description": "Average nightly rate for this stay, resolved from Rate Plan / Room Type"
+  },
+  {
+   "fieldname": "nights",
+   "fieldtype": "Int",
+   "label": "Nights",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "read_only": 1,
+   "in_list_view": 1
+  }
+ ],
+ "permissions": []
+}

@@ -1,0 +1,94 @@
+{
+ "doctype": "DocType",
+ "name": "Booking Payment",
+ "module": "Resort Booking",
+ "custom": 0,
+ "is_submittable": 1,
+ "engine": "InnoDB",
+ "autoname": "format:PAY-{YYYY}-{#####}",
+ "field_order": [
+  "booking",
+  "payment_type",
+  "column_break_3",
+  "amount",
+  "payment_date",
+  "section_break_6",
+  "payment_mode",
+  "reference_no",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "booking",
+   "fieldtype": "Link",
+   "label": "Booking",
+   "options": "Resort Booking",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "payment_type",
+   "fieldtype": "Select",
+   "label": "Payment Type",
+   "options": "Advance\nBalance\nRefund",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date",
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "options": "Cash\nCard\nUPI\nBank Transfer\nOther"
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Reference No"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Resort Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Receptionist",
+   "read": 1, "write": 1, "create": 1, "submit": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

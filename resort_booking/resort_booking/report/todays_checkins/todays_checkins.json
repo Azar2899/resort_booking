@@ -1,0 +1,16 @@
+{
+ "doctype": "Report",
+ "name": "Todays Checkins",
+ "report_name": "Todays Checkins",
+ "report_type": "Query Report",
+ "ref_doctype": "Resort Booking",
+ "module": "Resort Booking",
+ "is_standard": "Yes",
+ "disabled": 0,
+ "query": "select\n\tb.name as \"Booking:Link/Resort Booking:150\",\n\tb.guest as \"Guest:Link/Guest:150\",\n\tb.status as \"Status::100\",\n\tb.check_in as \"Check-in:Date:100\",\n\tb.grand_total as \"Grand Total:Currency:120\",\n\tb.balance_due as \"Balance Due:Currency:120\"\nfrom `tabResort Booking` b\nwhere b.check_in = CURDATE()\n\tand b.status in ('Pre-booked', 'Confirmed')\norder by b.guest",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Resort Manager"},
+  {"role": "Receptionist"}
+ ]
+}

@@ -1,0 +1,189 @@
+{
+ "doctype": "DocType",
+ "name": "Resort Booking",
+ "module": "Resort Booking",
+ "custom": 0,
+ "engine": "InnoDB",
+ "autoname": "format:BOOK-{YYYY}-{#####}",
+ "field_order": [
+  "guest",
+  "status",
+  "column_break_2",
+  "check_in",
+  "check_out",
+  "total_nights",
+  "section_break_rooms",
+  "rooms",
+  "section_break_totals",
+  "grand_total",
+  "min_advance_required",
+  "column_break_totals",
+  "advance_paid",
+  "balance_due",
+  "section_break_lifecycle",
+  "pre_booking_expires_on",
+  "checked_in_on",
+  "checked_out_on",
+  "column_break_lifecycle",
+  "cancellation_reason",
+  "cancelled_on",
+  "reminder_sent"
+ ],
+ "fields": [
+  {
+   "fieldname": "guest",
+   "fieldtype": "Link",
+   "label": "Guest",
+   "options": "Guest",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nPre-booked\nConfirmed\nChecked-in\nChecked-out\nCancelled",
+   "default": "Draft",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "check_in",
+   "fieldtype": "Date",
+   "label": "Check-in Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "check_out",
+   "fieldtype": "Date",
+   "label": "Check-out Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "total_nights",
+   "fieldtype": "Int",
+   "label": "Total Nights",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_rooms",
+   "fieldtype": "Section Break",
+   "label": "Rooms"
+  },
+  {
+   "fieldname": "rooms",
+   "fieldtype": "Table",
+   "label": "Rooms",
+   "options": "Booking Room",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_totals",
+   "fieldtype": "Section Break",
+   "label": "Payment Summary"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "min_advance_required",
+   "fieldtype": "Currency",
+   "label": "Minimum Advance Required",
+   "read_only": 1,
+   "description": "Booking can only move to Confirmed once Advance Paid reaches this amount"
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "advance_paid",
+   "fieldtype": "Currency",
+   "label": "Advance Paid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "balance_due",
+   "fieldtype": "Currency",
+   "label": "Balance Due",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_lifecycle",
+   "fieldtype": "Section Break",
+   "label": "Lifecycle",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "pre_booking_expires_on",
+   "fieldtype": "Datetime",
+   "label": "Pre-booking Expires On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "checked_in_on",
+   "fieldtype": "Datetime",
+   "label": "Checked-in On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "checked_out_on",
+   "fieldtype": "Datetime",
+   "label": "Checked-out On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_lifecycle",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cancellation_reason",
+   "fieldtype": "Small Text",
+   "label": "Cancellation Reason",
+   "depends_on": "eval:doc.status==\"Cancelled\""
+  },
+  {
+   "fieldname": "cancelled_on",
+   "fieldtype": "Datetime",
+   "label": "Cancelled On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reminder_sent",
+   "fieldtype": "Check",
+   "label": "Pre-booking Reminder Sent",
+   "hidden": 1,
+   "default": "0"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Resort Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Receptionist",
+   "read": 1, "write": 1, "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "guest"
+}

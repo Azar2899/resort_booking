@@ -1,0 +1,108 @@
+{
+	"room_types": [
+		{"room_type_name": "Luxury", "default_rate": 5000, "max_occupancy": 2, "description": "Spacious rooms with premium furnishing"},
+		{"room_type_name": "Medium", "default_rate": 3000, "max_occupancy": 2, "description": "Comfortable mid-range rooms"},
+		{"room_type_name": "Normal", "default_rate": 1800, "max_occupancy": 2, "description": "Standard rooms with essential amenities"},
+		{"room_type_name": "Dormitory", "default_rate": 800, "max_occupancy": 6, "description": "Shared dormitory beds, budget friendly"}
+	],
+	"room_categories": [
+		{"category_name": "Heritage", "description": "Rooms in the heritage wing"},
+		{"category_name": "Cottages", "description": "Standalone garden-facing cottages"},
+		{"category_name": "Villas", "description": "Private villas with a personal deck"},
+		{"category_name": "Game Zone", "description": "Rooms near the recreational area"},
+		{"category_name": "Pool Cabanas", "description": "Cabana-style rooms by the pool"}
+	],
+	"amenities": [
+		{"amenity_name": "Wi-Fi"},
+		{"amenity_name": "Pool Access"},
+		{"amenity_name": "AC"},
+		{"amenity_name": "TV"},
+		{"amenity_name": "Mini Bar"}
+	],
+	"rooms": [
+		{"room_number": "101", "room_type": "Luxury", "room_category": "Heritage", "floor": "1", "status": "Available", "amenities": ["Wi-Fi", "AC", "TV", "Mini Bar"]},
+		{"room_number": "102", "room_type": "Luxury", "room_category": "Villas", "floor": "1", "status": "Available", "amenities": ["Wi-Fi", "Pool Access", "AC", "TV"]},
+		{"room_number": "201", "room_type": "Medium", "room_category": "Cottages", "floor": "2", "status": "Available", "amenities": ["Wi-Fi", "AC"]},
+		{"room_number": "202", "room_type": "Medium", "room_category": "Cottages", "floor": "2", "status": "Under Maintenance", "amenities": ["Wi-Fi"]},
+		{"room_number": "301", "room_type": "Normal", "room_category": "Heritage", "floor": "3", "status": "Available", "amenities": ["Wi-Fi"]},
+		{"room_number": "302", "room_type": "Normal", "room_category": "Heritage", "floor": "3", "status": "Available", "amenities": ["Wi-Fi"]},
+		{"room_number": "D01", "room_type": "Dormitory", "room_category": "Game Zone", "floor": "Ground", "status": "Available", "amenities": ["Wi-Fi"]},
+		{"room_number": "D02", "room_type": "Dormitory", "room_category": "Game Zone", "floor": "Ground", "status": "Available", "amenities": ["Wi-Fi"]}
+	],
+	"rate_plans": [
+		{"room_type": "Luxury", "plan_name": "Festival Season", "from_date_offset": 20, "to_date_offset": 27, "rate_per_night": 7000}
+	],
+	"guests": [
+		{"guest_name": "Anita Sharma", "phone": "9876500001", "email": "anita.sharma@example.com", "id_proof_type": "Aadhar", "id_proof_number": "AAAA-1111-BBBB"},
+		{"guest_name": "Rohit Verma", "phone": "9876500002", "email": "rohit.verma@example.com", "id_proof_type": "Passport", "id_proof_number": "P1234567"},
+		{"guest_name": "Meera Iyer", "phone": "9876500003", "email": "meera.iyer@example.com", "id_proof_type": "Aadhar", "id_proof_number": "CCCC-2222-DDDD"},
+		{"guest_name": "Karan Malhotra", "phone": "9876500004", "email": "karan.malhotra@example.com", "id_proof_type": "Driving License", "id_proof_number": "DL-998877"}
+	],
+	"resort_resources": [
+		{"resource_name": "Main Pool", "resource_type": "Pool", "capacity": 4, "operating_hours_from": "06:00:00", "operating_hours_to": "21:00:00"},
+		{"resource_name": "Kids Game Zone", "resource_type": "Game Zone", "capacity": 6, "operating_hours_from": "09:00:00", "operating_hours_to": "20:00:00"}
+	],
+	"bookings": [
+		{
+			"guest": "Karan Malhotra",
+			"rooms": ["301"],
+			"check_in_offset": 12,
+			"check_out_offset": 14,
+			"status": "Draft",
+			"payments": []
+		},
+		{
+			"guest": "Meera Iyer",
+			"rooms": ["201"],
+			"check_in_offset": 7,
+			"check_out_offset": 9,
+			"status": "Pre-booked",
+			"payments": []
+		},
+		{
+			"guest": "Rohit Verma",
+			"rooms": ["102"],
+			"check_in_offset": 3,
+			"check_out_offset": 6,
+			"status": "Confirmed",
+			"payments": [
+				{"payment_type": "Advance", "amount": 5000, "payment_mode": "UPI", "reference_no": "UPI-REF-1001"}
+			]
+		},
+		{
+			"guest": "Anita Sharma",
+			"rooms": ["101"],
+			"check_in_offset": -1,
+			"check_out_offset": 2,
+			"status": "Checked-in",
+			"payments": [
+				{"payment_type": "Advance", "amount": 5000, "payment_mode": "Card", "reference_no": "CARD-REF-2001"}
+			],
+			"resource_bookings": [
+				{"resource": "Main Pool", "slot_date_offset": 0, "slot_start_time": "10:00:00", "slot_end_time": "11:00:00"}
+			]
+		},
+		{
+			"guest": "Anita Sharma",
+			"rooms": ["302"],
+			"check_in_offset": -10,
+			"check_out_offset": -7,
+			"status": "Checked-out",
+			"payments": [
+				{"payment_type": "Advance", "amount": 2000, "payment_mode": "Cash", "reference_no": ""},
+				{"payment_type": "Balance", "amount": 3400, "payment_mode": "Cash", "reference_no": ""}
+			]
+		},
+		{
+			"guest": "Karan Malhotra",
+			"rooms": ["D01"],
+			"check_in_offset": 25,
+			"check_out_offset": 27,
+			"status": "Cancelled",
+			"cancellation_reason": "Guest requested cancellation due to change of travel plans",
+			"payments": [
+				{"payment_type": "Advance", "amount": 1000, "payment_mode": "UPI", "reference_no": "UPI-REF-3001"}
+			]
+		}
+	]
+}

@@ -1,0 +1,15 @@
+{
+ "doctype": "Report",
+ "name": "Resort Occupancy Report",
+ "report_name": "Resort Occupancy Report",
+ "report_type": "Script Report",
+ "ref_doctype": "Resort Booking",
+ "module": "Resort Booking",
+ "is_standard": "Yes",
+ "disabled": 0,
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Resort Manager"},
+  {"role": "Receptionist"}
+ ]
+}

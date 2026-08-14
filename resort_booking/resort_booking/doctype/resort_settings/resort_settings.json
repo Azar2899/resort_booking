@@ -1,0 +1,88 @@
+{
+ "doctype": "DocType",
+ "name": "Resort Settings",
+ "module": "Resort Booking",
+ "custom": 0,
+ "issingle": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "advance_percent",
+  "pre_booking_hold_hours",
+  "management_alert_email",
+  "email_templates_section",
+  "booking_confirmation_template",
+  "payment_receipt_template",
+  "column_break_templates",
+  "booking_cancellation_template",
+  "prebooking_reminder_template"
+ ],
+ "fields": [
+  {
+   "fieldname": "advance_percent",
+   "fieldtype": "Percent",
+   "label": "Minimum Advance Percent",
+   "default": "30",
+   "reqd": 1,
+   "description": "A booking can only be Confirmed once the advance paid reaches this % of the grand total"
+  },
+  {
+   "fieldname": "pre_booking_hold_hours",
+   "fieldtype": "Int",
+   "label": "Pre-booking Hold Hours",
+   "default": "24",
+   "reqd": 1,
+   "description": "A Pre-booked reservation auto-cancels if not Confirmed within this many hours"
+  },
+  {
+   "fieldname": "management_alert_email",
+   "fieldtype": "Data",
+   "label": "Management Alert Email",
+   "options": "Email",
+   "description": "Receives an internal alert whenever a booking is cancelled"
+  },
+  {
+   "fieldname": "email_templates_section",
+   "fieldtype": "Section Break",
+   "label": "Email Templates",
+   "description": "Optional. If a template is not set here, a plain default message is sent instead."
+  },
+  {
+   "fieldname": "booking_confirmation_template",
+   "fieldtype": "Link",
+   "label": "Booking Confirmation Template",
+   "options": "Email Template"
+  },
+  {
+   "fieldname": "payment_receipt_template",
+   "fieldtype": "Link",
+   "label": "Payment Receipt Template",
+   "options": "Email Template"
+  },
+  {
+   "fieldname": "column_break_templates",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "booking_cancellation_template",
+   "fieldtype": "Link",
+   "label": "Booking Cancellation Template",
+   "options": "Email Template"
+  },
+  {
+   "fieldname": "prebooking_reminder_template",
+   "fieldtype": "Link",
+   "label": "Pre-booking Reminder Template",
+   "options": "Email Template"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1, "write": 1
+  },
+  {
+   "role": "Resort Manager",
+   "read": 1, "write": 1
+  }
+ ]
+}

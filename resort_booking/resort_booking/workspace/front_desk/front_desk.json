@@ -1,0 +1,246 @@
+{
+ "doctype": "Workspace",
+ "name": "Front Desk",
+ "label": "Front Desk",
+ "title": "Front Desk",
+ "module": "Resort Booking",
+ "public": 1,
+ "is_hidden": 0,
+ "for_user": "",
+ "hide_custom": 1,
+ "icon": "hotel",
+ "idx": 0,
+ "sequence_id": 1.0,
+ "content": "[{\"id\":\"hdr_shortcuts\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"sc_booking\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Resort Booking\",\"col\":3}},{\"id\":\"sc_calendar\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Booking Calendar\",\"col\":3}},{\"id\":\"sc_payment\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Booking Payment\",\"col\":3}},{\"id\":\"sc_guest\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Guest\",\"col\":3}},{\"id\":\"sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"hdr_reports\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Today's Activity</b></span>\",\"col\":12}},{\"id\":\"sc_occupancy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Resort Occupancy Report\",\"col\":4}},{\"id\":\"sc_checkins\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Todays Checkins\",\"col\":4}},{\"id\":\"sc_checkouts\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Todays Checkouts\",\"col\":4}},{\"id\":\"sp3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"hdr_masters\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters &amp; Setup</b></span>\",\"col\":12}},{\"id\":\"card_property\",\"type\":\"card\",\"data\":{\"card_name\":\"Property Setup\",\"col\":4}},{\"id\":\"card_bookings\",\"type\":\"card\",\"data\":{\"card_name\":\"Bookings & Payments\",\"col\":4}},{\"id\":\"card_activities\",\"type\":\"card\",\"data\":{\"card_name\":\"Activities\",\"col\":4}},{\"id\":\"card_settings\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports & Settings\",\"col\":4}}]",
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "Property Setup",
+   "link_count": 5,
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "Room",
+   "link_to": "Room",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Room Type",
+   "link_to": "Room Type",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Room Category",
+   "link_to": "Room Category",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Amenity",
+   "link_to": "Amenity",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Rate Plan",
+   "link_to": "Rate Plan",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "Bookings & Payments",
+   "link_count": 3,
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "Resort Booking",
+   "link_to": "Resort Booking",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Booking Payment",
+   "link_to": "Booking Payment",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Guest",
+   "link_to": "Guest",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "Activities",
+   "link_count": 2,
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "Resort Resource",
+   "link_to": "Resort Resource",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Resource Booking",
+   "link_to": "Resource Booking",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "Reports & Settings",
+   "link_count": 4,
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "Resort Occupancy Report",
+   "link_to": "Resort Occupancy Report",
+   "link_type": "Report",
+   "is_query_report": 1,
+   "hidden": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Todays Checkins",
+   "link_to": "Todays Checkins",
+   "link_type": "Report",
+   "is_query_report": 1,
+   "hidden": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Todays Checkouts",
+   "link_to": "Todays Checkouts",
+   "link_type": "Report",
+   "is_query_report": 1,
+   "hidden": 0,
+   "onboard": 0,
+   "link_count": 0
+  },
+  {
+   "type": "Link",
+   "label": "Resort Settings",
+   "link_to": "Resort Settings",
+   "link_type": "DocType",
+   "hidden": 0,
+   "is_query_report": 0,
+   "onboard": 0,
+   "link_count": 0
+  }
+ ],
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "label": "Resort Booking",
+   "link_to": "Resort Booking",
+   "doc_view": "List",
+   "color": "Blue"
+  },
+  {
+   "type": "DocType",
+   "label": "Booking Calendar",
+   "link_to": "Resort Booking",
+   "doc_view": "Calendar",
+   "color": "Green"
+  },
+  {
+   "type": "DocType",
+   "label": "Booking Payment",
+   "link_to": "Booking Payment",
+   "doc_view": "List",
+   "color": "Yellow"
+  },
+  {
+   "type": "DocType",
+   "label": "Guest",
+   "link_to": "Guest",
+   "doc_view": "List",
+   "color": "Grey"
+  },
+  {
+   "type": "Report",
+   "label": "Resort Occupancy Report",
+   "link_to": "Resort Occupancy Report",
+   "doc_view": "",
+   "color": "Purple"
+  },
+  {
+   "type": "Report",
+   "label": "Todays Checkins",
+   "link_to": "Todays Checkins",
+   "doc_view": "",
+   "color": "Orange"
+  },
+  {
+   "type": "Report",
+   "label": "Todays Checkouts",
+   "link_to": "Todays Checkouts",
+   "doc_view": "",
+   "color": "Red"
+  }
+ ],
+ "charts": [],
+ "number_cards": [],
+ "quick_lists": [],
+ "custom_blocks": [],
+ "roles": [],
+ "parent_page": ""
+}

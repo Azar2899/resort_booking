@@ -1,0 +1,86 @@
+{
+ "doctype": "DocType",
+ "name": "Guest",
+ "module": "Resort Booking",
+ "custom": 0,
+ "engine": "InnoDB",
+ "autoname": "naming_series:",
+ "field_order": [
+  "naming_series",
+  "guest_name",
+  "phone",
+  "email",
+  "column_break_5",
+  "id_proof_type",
+  "id_proof_number",
+  "address"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "GUEST-.#####",
+   "default": "GUEST-.#####"
+  },
+  {
+   "fieldname": "guest_name",
+   "fieldtype": "Data",
+   "label": "Guest Name",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone",
+   "options": "Phone",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "id_proof_type",
+   "fieldtype": "Select",
+   "label": "ID Proof Type",
+   "options": "Aadhar\nPassport\nDriving License\nOther"
+  },
+  {
+   "fieldname": "id_proof_number",
+   "fieldtype": "Data",
+   "label": "ID Proof Number"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Resort Manager",
+   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+  },
+  {
+   "role": "Receptionist",
+   "read": 1, "write": 1, "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

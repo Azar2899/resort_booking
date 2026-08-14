@@ -1,8 +1,8 @@
 app_name = "resort_booking"
 app_title = "Resort Booking"
-app_publisher = "Azar2899"
-app_description = "Frappe/ERPNext Resort Booking System"
-app_email = "azar.m.90804@gmail.com"
+app_publisher = "Prithivraj Thangadurai"
+app_description = "Resort Booking Management System"
+app_email = "prithivrajthangadurai@gmail.com"
 app_license = "mit"
 
 # Apps
@@ -46,7 +46,7 @@ app_license = "mit"
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+doctype_calendar_js = {"Resort Booking": "public/js/resort_booking_calendar.js"}
 
 # Svg Icons
 # ------------------
@@ -148,23 +148,14 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"resort_booking.tasks.all"
-# 	],
-# 	"daily": [
-# 		"resort_booking.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"resort_booking.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"resort_booking.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"resort_booking.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"hourly": [
+		"resort_booking.resort_booking.tasks.expire_pre_bookings",
+	],
+	"daily": [
+		"resort_booking.resort_booking.tasks.send_prebooking_reminders",
+	],
+}
 
 # Testing
 # -------
