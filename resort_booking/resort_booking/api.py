@@ -6,15 +6,10 @@ from resort_booking.resort_booking.doctype.resort_booking.resort_booking import 
 
 @frappe.whitelist()
 def check_availability(check_in, check_out, room_type=None):
-	"""Return rooms that are free for the given date range.
-
-	GET /api/method/resort_booking.api.check_availability
-		?check_in=2026-08-20&check_out=2026-08-22&room_type=Luxury
-	"""
 	check_in = getdate(check_in)
 	check_out = getdate(check_out)
 	if check_out <= check_in:
-		frappe.throw("check_out must be after check_in")
+		frappe.throw("Check-out date must be after Check-in date")
 
 	room_filters = {"status": ["!=", "Under Maintenance"]}
 	if room_type:
@@ -42,13 +37,8 @@ def get_booked_room_names(check_in, check_out):
 	return {row.room for row in rows}
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_resource_slots(resource, slot_date):
-	"""Return booked slots and remaining capacity for a resource on a date.
-
-	GET /api/method/resort_booking.api.get_resource_slots
-		?resource=Main Pool&slot_date=2026-08-20
-	"""
 	capacity = frappe.db.get_value("Resort Resource", resource, "capacity")
 	if capacity is None:
 		frappe.throw(f"Resort Resource {resource} not found")
@@ -61,3 +51,4 @@ def get_resource_slots(resource, slot_date):
 	)
 
 	return {"resource": resource, "capacity": capacity, "booked_slots": booked_slots}
+

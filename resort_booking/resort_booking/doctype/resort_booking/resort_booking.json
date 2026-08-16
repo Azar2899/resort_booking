@@ -1,17 +1,19 @@
 {
- "doctype": "DocType",
- "name": "Resort Booking",
- "module": "Resort Booking",
- "custom": 0,
- "engine": "InnoDB",
+ "actions": [],
  "autoname": "format:BOOK-{YYYY}-{#####}",
+ "creation": "2026-08-14 19:29:48.014626",
+ "doctype": "DocType",
+ "engine": "InnoDB",
  "field_order": [
   "guest",
   "status",
+  "resource_booking_required",
+  "is_refund_required",
   "column_break_2",
   "check_in",
   "check_out",
   "total_nights",
+  "guests_staying",
   "section_break_rooms",
   "rooms",
   "section_break_totals",
@@ -20,6 +22,7 @@
   "column_break_totals",
   "advance_paid",
   "balance_due",
+  "refund_amount",
   "section_break_lifecycle",
   "pre_booking_expires_on",
   "checked_in_on",
@@ -33,22 +36,22 @@
   {
    "fieldname": "guest",
    "fieldtype": "Link",
-   "label": "Guest",
-   "options": "Guest",
-   "reqd": 1,
+   "in_global_search": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "in_global_search": 1
+   "label": "Guest",
+   "options": "Guest",
+   "reqd": 1
   },
   {
+   "default": "Draft",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Draft\nPre-booked\nConfirmed\nChecked-in\nChecked-out\nCancelled",
-   "default": "Draft",
-   "reqd": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1
+   "reqd": 1
   },
   {
    "fieldname": "column_break_2",
@@ -56,17 +59,17 @@
   },
   {
    "fieldname": "check_in",
-   "fieldtype": "Date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
    "label": "Check-in Date",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "check_out",
-   "fieldtype": "Date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
    "label": "Check-out Date",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "total_nights",
@@ -94,16 +97,16 @@
   {
    "fieldname": "grand_total",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Grand Total",
-   "read_only": 1,
-   "in_list_view": 1
+   "read_only": 1
   },
   {
+   "description": "Booking can only move to Confirmed once Advance Paid reaches this amount",
    "fieldname": "min_advance_required",
    "fieldtype": "Currency",
    "label": "Minimum Advance Required",
-   "read_only": 1,
-   "description": "Booking can only move to Confirmed once Advance Paid reaches this amount"
+   "read_only": 1
   },
   {
    "fieldname": "column_break_totals",
@@ -112,7 +115,7 @@
   {
    "fieldname": "advance_paid",
    "fieldtype": "Currency",
-   "label": "Advance Paid",
+   "label": "Amount Paid",
    "read_only": 1
   },
   {
@@ -122,10 +125,10 @@
    "read_only": 1
   },
   {
+   "collapsible": 1,
    "fieldname": "section_break_lifecycle",
    "fieldtype": "Section Break",
-   "label": "Lifecycle",
-   "collapsible": 1
+   "label": "Lifecycle"
   },
   {
    "fieldname": "pre_booking_expires_on",
@@ -150,10 +153,10 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.status==\"Cancelled\"",
    "fieldname": "cancellation_reason",
    "fieldtype": "Small Text",
-   "label": "Cancellation Reason",
-   "depends_on": "eval:doc.status==\"Cancelled\""
+   "label": "Cancellation Reason"
   },
   {
    "fieldname": "cancelled_on",
@@ -162,28 +165,84 @@
    "read_only": 1
   },
   {
+   "default": "0",
    "fieldname": "reminder_sent",
    "fieldtype": "Check",
-   "label": "Pre-booking Reminder Sent",
    "hidden": 1,
-   "default": "0"
+   "label": "Pre-booking Reminder Sent"
+  },
+  {
+   "default": "0",
+   "fieldname": "resource_booking_required",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Resource Booking Required"
+  },
+  {
+   "fieldname": "guests_staying",
+   "fieldtype": "Int",
+   "label": "Guests Staying",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_refund_required",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Is Refund Required"
+  },
+  {
+   "fieldname": "refund_amount",
+   "fieldtype": "Currency",
+   "label": "Refund Amount",
+   "read_only": 1
   }
  ],
+ "links": [
+  {
+   "link_doctype": "Resource Booking",
+   "link_fieldname": "booking"
+  },
+  {
+   "link_doctype": "Booking Payment",
+   "link_fieldname": "booking"
+  }
+ ],
+ "modified": "2026-08-16 09:08:12.597773",
+ "modified_by": "Administrator",
+ "module": "Resort Booking",
+ "name": "Resort Booking",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
  "permissions": [
   {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
    "role": "System Manager",
-   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+   "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
    "role": "Resort Manager",
-   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+   "write": 1
   },
   {
+   "create": 1,
+   "read": 1,
    "role": "Receptionist",
-   "read": 1, "write": 1, "create": 1
+   "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "title_field": "guest"
 }

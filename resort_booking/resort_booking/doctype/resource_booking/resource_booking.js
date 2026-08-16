@@ -1,12 +1,80 @@
 frappe.ui.form.on("Resource Booking", {
 	validate(frm) {
-		// Fast client-side check before the round trip - the server (see
-		// resource_booking.py validate_times()) is still the real authority
-		// and re-checks this itself, so nothing here is a security control.
 		if (frm.doc.slot_start_time && frm.doc.slot_end_time && frm.doc.slot_end_time <= frm.doc.slot_start_time) {
 			frappe.throw(__("Slot End Time must be after Slot Start Time"));
 		}
 	},
+
+	async validate(frm) {
+
+        if (!frm.doc.resource || !frm.doc.slot_date ||
+            !frm.doc.slot_start_time || !frm.doc.slot_end_time) {
+            return;
+        }
+
+        if (frm.doc.slot_start_time >= frm.doc.slot_end_time) {
+            frappe.msgprint({
+                title: __("Invalid Time"),
+                message: __("Slot End Time must be after Slot Start Time."),
+                indicator: "red"
+            });
+
+            frappe.validated = false;
+            return;
+        }
+
+        const bookings = await frappe.db.get_list("Resource Booking", {
+            filters: {
+                resource: frm.doc.resource,
+                slot_date: frm.doc.slot_date,
+                status: "Booked",
+                name: ["!=", frm.doc.name]
+            },
+            fields: [
+                "name",
+                "slot_start_time",
+                "slot_end_time",
+                
+                "guest"
+            ],
+            limit_page_length: 500
+        });
+
+        const new_start = frm.doc.slot_start_time;
+        const new_end = frm.doc.slot_end_time;
+
+        for (const booking of bookings) {
+
+            const existing_start = booking.slot_start_time;
+            const existing_end = booking.slot_end_time;
+
+
+            if (
+                new_start < existing_end &&
+                new_end > existing_start
+            ) {
+
+                frappe.msgprint({
+                    title: __("Resource Already Booked"),
+                    message: __(
+                        "The resource <b>{0}</b> is already booked on <b>{1}</b> from <b>{2}</b> to <b>{3}</b>.Your selected time <b>{4}</b> to <b>{5}</b> overlaps with this booking.",
+                        [
+                            frm.doc.resource,
+                            frappe.datetime.str_to_user(booking.slot_date || frm.doc.slot_date),
+                            existing_start,
+                            existing_end,
+                            new_start,
+                            new_end
+                        ]
+                    ),
+                    indicator: "red"
+                });
+
+                frappe.validated = false;
+                return;
+            }
+        }
+    },
 
 	resource(frm) {
 		frm.trigger("show_slot_button");

@@ -1,13 +1,13 @@
 {
- "doctype": "DocType",
- "name": "Resource Booking",
- "module": "Resort Booking",
- "custom": 0,
- "engine": "InnoDB",
+ "actions": [],
  "autoname": "format:RES-{YYYY}-{#####}",
+ "creation": "2026-08-14 19:29:47.765386",
+ "doctype": "DocType",
+ "engine": "InnoDB",
  "field_order": [
   "resource",
   "booking",
+  "guest",
   "status",
   "column_break_4",
   "slot_date",
@@ -18,29 +18,29 @@
   {
    "fieldname": "resource",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Resource",
    "options": "Resort Resource",
-   "reqd": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1
+   "reqd": 1
   },
   {
+   "description": "The room reservation this activity slot is linked to",
    "fieldname": "booking",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Room Booking",
    "options": "Resort Booking",
-   "reqd": 1,
-   "in_list_view": 1,
-   "description": "The room reservation this activity slot is linked to"
+   "reqd": 1
   },
   {
+   "default": "Booked",
    "fieldname": "status",
    "fieldtype": "Select",
-   "label": "Status",
-   "options": "Booked\nCancelled",
-   "default": "Booked",
    "in_list_view": 1,
-   "in_standard_filter": 1
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Booked\nCancelled"
   },
   {
    "fieldname": "column_break_4",
@@ -49,39 +49,67 @@
   {
    "fieldname": "slot_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Slot Date",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "slot_start_time",
    "fieldtype": "Time",
+   "in_list_view": 1,
    "label": "Slot Start Time",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "slot_end_time",
    "fieldtype": "Time",
+   "in_list_view": 1,
    "label": "Slot End Time",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
+  },
+  {
+   "fieldname": "guest",
+   "fieldtype": "Link",
+   "label": "Guest",
+   "options": "Guest"
   }
  ],
+ "links": [],
+ "modified": "2026-08-14 22:55:57.813525",
+ "modified_by": "Administrator",
+ "module": "Resort Booking",
+ "name": "Resource Booking",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
  "permissions": [
   {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
    "role": "System Manager",
-   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+   "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
    "role": "Resort Manager",
-   "read": 1, "write": 1, "create": 1, "delete": 1, "report": 1, "export": 1
+   "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
    "role": "Receptionist",
-   "read": 1, "write": 1, "create": 1, "delete": 1
+   "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

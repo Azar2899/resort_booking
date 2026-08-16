@@ -1,10 +1,8 @@
-// Copyright (c) 2026, Prithivraj Thangadurai and contributors
+// Copyright (c) 2026, Azar and contributors
 // For license information, please see license.txt
 
 frappe.ui.form.on("Room", {
 	refresh(frm) {
-		// Quick visual cue of the room's current state on the form itself,
-		// not just in the list view.
 		const indicator_by_status = {
 			Available: "green",
 			Occupied: "orange",

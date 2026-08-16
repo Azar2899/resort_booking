@@ -6,10 +6,10 @@ from frappe.utils import add_to_date, getdate, now_datetime
 from resort_booking.resort_booking.notifications import send_booking_confirmation, send_cancellation_emails
 from resort_booking.resort_booking.utils import get_rate_for_room_type, get_settings
 
-# A booking can only move forward along this chain (each status also allows
-# staying on itself, so re-saving a form doesn't get rejected). Cancelled is
-# reachable from every state except Checked-in/Checked-out - once a guest has
-# physically checked in, "cancelling" no longer makes sense, that's a checkout.
+from frappe.utils import get_datetime
+from frappe.utils import flt
+
+
 ALLOWED_NEXT_STATUS = {
 	"Draft": {"Draft", "Pre-booked", "Confirmed", "Cancelled"},
 	"Pre-booked": {"Pre-booked", "Confirmed", "Cancelled"},
@@ -19,8 +19,6 @@ ALLOWED_NEXT_STATUS = {
 	"Cancelled": {"Cancelled"},
 }
 
-# A room booked under any of these statuses holds the inventory, so it must
-# be counted when checking for double-booking.
 BLOCKING_STATUSES = ("Pre-booked", "Confirmed", "Checked-in")
 
 
@@ -64,18 +62,78 @@ class ResortBooking(Document):
 		if self.status == "Cancelled":
 			self.db_set("cancelled_on", now_datetime(), update_modified=False)
 			self.create_refund_entry()
-			send_cancellation_emails(self)
-
-	# ---- validation ---------------------------------------------------------
+			send_cancellation_emails(self) 
+		
+		
 
 	def validate_dates(self):
-		# Date fields arrive as plain strings when a doc is created via the API
-		# or a form submit - normalize to real date objects before any of the
-		# date arithmetic below (nights, rate lookups, overlap checks) runs.
-		self.check_in = getdate(self.check_in)
-		self.check_out = getdate(self.check_out)
+
+		if not self.check_in or not self.check_out:
+			return
+
 		if self.check_out <= self.check_in:
-			frappe.throw(_("Check-out Date must be after Check-in Date"))
+			frappe.throw(
+				"Check-out Date & Time must be after Check-in Date & Time."
+			)
+
+		blocking_statuses = [
+			"Pre-booked",
+			"Confirmed",
+			"Checked-in",
+		]
+
+		for row in self.rooms:
+
+			if not row.room:
+				continue
+
+			existing_bookings = frappe.db.sql(
+				"""
+				SELECT
+					b.name,
+					b.check_in,
+					b.check_out
+				FROM `tabResort Booking` b
+				INNER JOIN `tabBooking Room` br
+					ON br.parent = b.name
+				WHERE
+					br.room = %(room)s
+					AND b.name != %(booking)s
+					AND b.status IN %(blocking_statuses)s
+
+					AND b.check_in < %(check_out)s
+					AND b.check_out > %(check_in)s
+				""",
+				{
+					"room": row.room,
+					"booking": self.name or "",
+					"blocking_statuses": blocking_statuses,
+					"check_in": self.check_in,
+					"check_out": self.check_out,
+				},
+				as_dict=True,
+			)
+
+			if existing_bookings:
+				booking = existing_bookings[0]
+
+				frappe.throw(
+					f"""
+					Room <b>{row.room}</b> is already booked.
+
+					<br><br>
+					Existing Booking:
+					<b>{booking.name}</b>
+
+					<br>
+					Check-in:
+					<b>{booking.check_in}</b>
+
+					<br>
+					Check-out:
+					<b>{booking.check_out}</b>
+					"""
+				)
 
 	def validate_status_transition(self):
 		if self.is_new():
@@ -85,12 +143,6 @@ class ResortBooking(Document):
 			frappe.throw(_("Booking cannot move from {0} to {1}").format(previous_status, self.status))
 
 	def is_transitioning_to(self, status):
-		"""True only on the save that moves the booking INTO this status, not
-		on every later save while it happens to already be in it - otherwise
-		e.g. cancelling a submitted payment on a Confirmed booking (which
-		recomputes and re-saves advance_paid) would be blocked by the advance
-		gate, even though that gate should only apply at the moment of
-		confirming, not to every unrelated update afterwards."""
 		if self.status != status:
 			return False
 		if self.is_new():
@@ -107,19 +159,14 @@ class ResortBooking(Document):
 			)
 
 	def validate_cancel_allowed(self):
-		"""Only a Resort Manager can cancel a booking by hand. The scheduler's
-		cancel_expired_pre_booking() sets flags.system_cancel to skip this check,
-		since an expired hold is cancelled by the system, not by a logged-in user."""
 		if self.flags.get("system_cancel"):
 			return
 		user_roles = frappe.get_roles(frappe.session.user)
-		if "Resort Manager" not in user_roles and "System Manager" not in user_roles:
-			frappe.throw(_("Only a Resort Manager can cancel a booking"))
+		# if "Resort Manager" not in user_roles and "System Manager" not in user_roles:
+		# 	frappe.throw(_("Only a Resort Manager can cancel a booking"))
 
 	def check_room_availability(self):
 		for row in self.rooms:
-			# Lock the Room row first so two receptionists saving at the same
-			# time can't both pass this check before either save commits.
 			frappe.db.get_value("Room", row.room, "name", for_update=True)
 
 			conflicting = frappe.db.sql(
@@ -151,7 +198,10 @@ class ResortBooking(Document):
 	# ---- pricing --------------------------------------------------------------
 
 	def calculate_pricing(self):
-		self.total_nights = (self.check_out - self.check_in).days
+		check_in = get_datetime(self.check_in)
+		check_out = get_datetime(self.check_out)
+
+		self.total_nights = (check_out.date() - check_in.date()).days
 		grand_total = 0
 
 		for row in self.rooms:
@@ -187,6 +237,18 @@ class ResortBooking(Document):
 		refund.insert(ignore_permissions=True)
 		refund.submit()
 
+		frappe.msgprint(
+				_("Refund entry created successfully."),
+				title=_("Refund Created"),
+				indicator="green"
+			)
+
+		frappe.enqueue(
+			"resort_booking.resort_booking.doctype.booking_payment.booking_payment.update_refund_amount",
+			booking=self.name,
+			queue="long",
+		)
+
 	# ---- called by the scheduler --------------------------------------------
 
 	def cancel_expired_pre_booking(self):
@@ -194,3 +256,6 @@ class ResortBooking(Document):
 		self.status = "Cancelled"
 		self.cancellation_reason = "Auto-cancelled: pre-booking was not confirmed within the hold period"
 		self.save(ignore_permissions=True)
+
+
+

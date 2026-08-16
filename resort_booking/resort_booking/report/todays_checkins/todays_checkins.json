@@ -1,16 +1,41 @@
 {
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [],
+ "creation": "2026-08-14 19:29:48.577120",
+ "disabled": 0,
+ "docstatus": 0,
  "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": null,
+ "modified": "2026-08-16 10:23:45.320035",
+ "modified_by": "Administrator",
+ "module": "Resort Booking",
  "name": "Todays Checkins",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select\n\tb.name as \"Booking:Link/Resort Booking:150\",\n\tb.guest as \"Guest:Link/Guest:150\",\n\tb.status as \"Status::100\",\n\tb.check_in as \"Check-in:Date:100\",\n\tb.grand_total as \"Grand Total:Currency:120\",\n\tb.balance_due as \"Balance Due:Currency:120\"\nfrom `tabResort Booking` b\nwhere b.check_in = CURDATE()\n\tand b.status in ('Pre-booked', 'Confirmed')\norder by b.guest",
+ "ref_doctype": "Resort Booking",
  "report_name": "Todays Checkins",
  "report_type": "Query Report",
- "ref_doctype": "Resort Booking",
- "module": "Resort Booking",
- "is_standard": "Yes",
- "disabled": 0,
- "query": "select\n\tb.name as \"Booking:Link/Resort Booking:150\",\n\tb.guest as \"Guest:Link/Guest:150\",\n\tb.status as \"Status::100\",\n\tb.check_in as \"Check-in:Date:100\",\n\tb.grand_total as \"Grand Total:Currency:120\",\n\tb.balance_due as \"Balance Due:Currency:120\"\nfrom `tabResort Booking` b\nwhere b.check_in = CURDATE()\n\tand b.status in ('Pre-booked', 'Confirmed')\norder by b.guest",
  "roles": [
-  {"role": "System Manager"},
-  {"role": "Resort Manager"},
-  {"role": "Receptionist"}
- ]
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Resort Manager"
+  },
+  {
+   "role": "Receptionist"
+  },
+  {
+   "role": "Resort Sales Manager"
+  },
+  {
+   "role": "Resort Owner"
+  }
+ ],
+ "timeout": 0
 }

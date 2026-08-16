@@ -1,9 +1,7 @@
 {
+ "actions": [],
+ "creation": "2026-08-14 19:29:47.867717",
  "doctype": "DocType",
- "name": "Resort Settings",
- "module": "Resort Booking",
- "custom": 0,
- "issingle": 1,
  "engine": "InnoDB",
  "field_order": [
   "advance_percent",
@@ -18,33 +16,34 @@
  ],
  "fields": [
   {
+   "default": "30",
+   "description": "A booking can only be Confirmed once the advance paid reaches this % of the grand total",
    "fieldname": "advance_percent",
    "fieldtype": "Percent",
+   "in_list_view": 1,
    "label": "Minimum Advance Percent",
-   "default": "30",
-   "reqd": 1,
-   "description": "A booking can only be Confirmed once the advance paid reaches this % of the grand total"
+   "reqd": 1
   },
   {
+   "default": "24",
+   "description": "A Pre-booked reservation auto-cancels if not Confirmed within this many hours",
    "fieldname": "pre_booking_hold_hours",
    "fieldtype": "Int",
+   "in_list_view": 1,
    "label": "Pre-booking Hold Hours",
-   "default": "24",
-   "reqd": 1,
-   "description": "A Pre-booked reservation auto-cancels if not Confirmed within this many hours"
+   "reqd": 1
   },
   {
    "fieldname": "management_alert_email",
    "fieldtype": "Data",
    "label": "Management Alert Email",
-   "options": "Email",
-   "description": "Receives an internal alert whenever a booking is cancelled"
+   "options": "Email"
   },
   {
+   "description": "Optional. If a template is not set here, a plain default message is sent instead.",
    "fieldname": "email_templates_section",
    "fieldtype": "Section Break",
-   "label": "Email Templates",
-   "description": "Optional. If a template is not set here, a plain default message is sent instead."
+   "label": "Email Templates"
   },
   {
    "fieldname": "booking_confirmation_template",
@@ -75,14 +74,27 @@
    "options": "Email Template"
   }
  ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-16 09:11:26.209005",
+ "modified_by": "Administrator",
+ "module": "Resort Booking",
+ "name": "Resort Settings",
+ "owner": "Administrator",
  "permissions": [
   {
+   "read": 1,
    "role": "System Manager",
-   "read": 1, "write": 1
+   "write": 1
   },
   {
+   "read": 1,
    "role": "Resort Manager",
-   "read": 1, "write": 1
+   "write": 1
   }
- ]
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
 }

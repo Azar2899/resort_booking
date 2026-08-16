@@ -11,9 +11,6 @@ class ResourceBooking(Document):
 			self.check_slot_capacity()
 
 	def validate_times(self):
-		# Time fields can arrive as a string (from the UI/API) or a timedelta
-		# (when read back from the database) - normalize both sides to
-		# datetime.time before comparing, otherwise "<" raises a TypeError.
 		start_time = get_time(self.slot_start_time)
 		end_time = get_time(self.slot_end_time)
 		if end_time <= start_time:
@@ -26,8 +23,6 @@ class ResourceBooking(Document):
 			frappe.throw(_("{0} closes at {1}").format(self.resource, resource.operating_hours_to))
 
 	def check_slot_capacity(self):
-		# Lock the Resort Resource row first so two guests booking the same
-		# slot at the same time can't both slip past the capacity count below.
 		frappe.db.get_value("Resort Resource", self.resource, "name", for_update=True)
 
 		overlapping_count = frappe.db.count(

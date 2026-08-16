@@ -1,7 +1,7 @@
 [project]
 name = "resort_booking"
 authors = [
-    { name = "Prithivraj Thangadurai", email = "prithivrajthangadurai@gmail.com"}
+    { name = "Azar", email = "azar.m.90804@gmail.com"}
 ]
 description = "Resort Booking Management System"
 requires-python = ">=3.10"

@@ -1,8 +1,8 @@
 app_name = "resort_booking"
 app_title = "Resort Booking"
-app_publisher = "Prithivraj Thangadurai"
+app_publisher = "Azar"
 app_description = "Resort Booking Management System"
-app_email = "prithivrajthangadurai@gmail.com"
+app_email = "azar.m.90804@gmail.com"
 app_license = "mit"
 
 # Apps
@@ -147,6 +147,90 @@ doctype_calendar_js = {"Resort Booking": "public/js/resort_booking_calendar.js"}
 
 # Scheduled Tasks
 # ---------------
+
+
+fixtures = [
+	{
+		"dt": "Role",
+		"filters": [
+			["name", "in", [
+				"Resort Sales Manager",
+				"Resort Owner",
+				"Resort Manager",
+				"Receptionist"
+			]]
+		]
+	},
+	{
+		"dt": "Custom DocPerm",
+		"filters": [
+			["name", "in", [
+				"4ivkechdp0",
+				"3rqf7uavjs",
+				"3dli5n6jqn",
+				"tt5lafklh7",
+				"rindrub6f9",
+				"pj1cl2i3j8",
+				"paudetrpgl",
+				"ovce0dvokn",
+				"olave4q5ug",
+				"d7c9usdhe4",
+				"d0ls9a0jje",
+				"co8d42jtfr",
+				"cc5ao7ojsb",
+				"c4dkpn091v",
+				"buugkc7end",
+				"biup2dq90g",
+				"bf4dqc7q6o",
+				"bbpvisrbi0",
+				"b5sq35brcn",
+				"96pktp5qj1",
+				"6cd3el11fa",
+				"6cdksu8hod",
+				"6cdcat1opr",
+				"6cctnl83ua",
+				"64kkt0ud65",
+				"64kknods2i",
+				"64k02t61vd",
+				"64khdkloq6",
+				"5rh5flrms3",
+				"5rgm7vibn1",
+				"5bri5012sj",
+				"560h9a3j65",
+				"5606i9q1k6",
+				"4vpss6veok",
+				"4mepc7nf1r",
+				"4meml8rmp6",
+				"4dvsr08knv",
+				"4durkm6et3",
+				"48ojtc6md8",
+				"48nmqac2ll",
+				"41t7chq86h",
+				"41t08c69ri",
+				"3rfc0jv9d0",
+				"3rf1bsp9gn",
+				"3rf8ka7qn0",
+				"27clcjdfjp",
+				"27crip6d1j",
+				"27bc0cfc6a",
+				"215ohdji5k",
+				"215lfvr8op",
+				"215sot970e",
+				"1pbc28d2s0",
+				"1pbf42igbi",
+				"1pb5hl6ifn"
+			]]
+		]
+	},
+	{
+		"dt": "Workspace",
+		"filters": [
+			["name", "in", [
+				"Resort Management"
+			]]
+		]
+	}
+]
 
 scheduler_events = {
 	"hourly": [

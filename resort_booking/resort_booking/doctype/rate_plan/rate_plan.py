@@ -13,8 +13,6 @@ class RatePlan(Document):
 		self.check_overlap_with_other_plans()
 
 	def check_overlap_with_other_plans(self):
-		"""Two Rate Plans for the same Room Type cannot cover the same date,
-		otherwise pricing would be ambiguous (which rate applies?)."""
 		overlapping = frappe.db.sql(
 			"""
 			select name from `tabRate Plan`

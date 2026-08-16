@@ -1,12 +1,11 @@
 {
+ "actions": [],
+ "creation": "2026-08-14 19:29:48.204583",
  "doctype": "DocType",
- "name": "Booking Room",
- "module": "Resort Booking",
- "custom": 0,
- "istable": 1,
  "engine": "InnoDB",
  "field_order": [
   "room",
+  "max_occupancy",
   "rate_per_night",
   "nights",
   "amount"
@@ -15,33 +14,51 @@
   {
    "fieldname": "room",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Room",
    "options": "Room",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
+   "description": "Average nightly rate for this stay, resolved from Rate Plan / Room Type",
    "fieldname": "rate_per_night",
    "fieldtype": "Currency",
-   "label": "Rate Per Night",
-   "read_only": 1,
    "in_list_view": 1,
-   "description": "Average nightly rate for this stay, resolved from Rate Plan / Room Type"
+   "label": "Rate Per Night",
+   "read_only": 1
   },
   {
    "fieldname": "nights",
    "fieldtype": "Int",
+   "in_list_view": 1,
    "label": "Nights",
-   "read_only": 1,
-   "in_list_view": 1
+   "read_only": 1
   },
   {
    "fieldname": "amount",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Amount",
-   "read_only": 1,
-   "in_list_view": 1
+   "read_only": 1
+  },
+  {
+   "fieldname": "max_occupancy",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Max Occupancy",
+   "read_only": 1
   }
  ],
- "permissions": []
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-16 00:55:47.462170",
+ "modified_by": "Administrator",
+ "module": "Resort Booking",
+ "name": "Booking Room",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
 }

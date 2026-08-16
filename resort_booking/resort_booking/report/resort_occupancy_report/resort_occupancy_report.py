@@ -4,8 +4,7 @@ from datetime import timedelta
 import frappe
 from frappe.utils import add_months, get_first_day, get_last_day, getdate
 
-# Only these statuses represent a room actually being sold - Draft/Pre-booked
-# holds are not committed revenue, and Cancelled frees the room up again.
+
 OCCUPIED_STATUSES = ("Confirmed", "Checked-in", "Checked-out")
 
 
@@ -94,5 +93,5 @@ def get_chart(data):
 			"labels": [row["month"] for row in data],
 			"datasets": [{"name": "Occupancy %", "values": [row["occupancy_percent"] for row in data]}],
 		},
-		"type": "bar",
+		"type": "pie",
 	}
