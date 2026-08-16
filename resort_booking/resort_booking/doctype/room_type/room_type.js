@@ -7,4 +7,15 @@ frappe.ui.form.on("Room Type", {
 			frappe.throw(__("Default Rate Per Night must be greater than zero"));
 		}
 	},
+	refresh(frm) {
+		if (frm.is_new()) {
+			return;
+		}
+
+		frm.add_custom_button("Rate Plan", function () {
+			frappe.new_doc("Rate Plan", {
+				room_type: frm.doc.name
+			});
+		});
+	}
 });
