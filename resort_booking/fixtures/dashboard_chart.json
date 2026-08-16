@@ -1,0 +1,49 @@
+[
+ {
+  "aggregate_function_based_on": null,
+  "based_on": "",
+  "chart_name": "Monthly Occupancy Chart",
+  "chart_type": "Report",
+  "color": null,
+  "currency": "AED",
+  "custom_options": null,
+  "docstatus": 0,
+  "doctype": "Dashboard Chart",
+  "document_type": "",
+  "dynamic_filters_json": "{}",
+  "filters_json": "{}",
+  "from_date": null,
+  "group_by_based_on": null,
+  "group_by_type": "Count",
+  "heatmap_year": null,
+  "is_public": 1,
+  "is_standard": 0,
+  "last_synced_on": null,
+  "modified": "2026-08-16 11:03:23.144177",
+  "module": null,
+  "name": "Monthly Occupancy Chart",
+  "number_of_groups": 0,
+  "parent_document_type": "",
+  "report_name": "Resort Occupancy Report",
+  "roles": [],
+  "show_values_over_chart": 0,
+  "source": "",
+  "time_interval": "Weekly",
+  "timeseries": 0,
+  "timespan": "Last Month",
+  "to_date": null,
+  "type": "Bar",
+  "use_report_chart": 0,
+  "value_based_on": "",
+  "x_field": "month",
+  "y_axis": [
+   {
+    "color": null,
+    "parent": "Monthly Occupancy Chart",
+    "parentfield": "y_axis",
+    "parenttype": "Dashboard Chart",
+    "y_field": "booked_nights"
+   }
+  ]
+ }
+]

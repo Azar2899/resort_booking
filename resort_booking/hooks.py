@@ -229,7 +229,16 @@ fixtures = [
 				"Resort Management"
 			]]
 		]
+	},
+    {
+		"dt": "Dashboard Chart",
+		"filters": [
+			["name", "in", [
+				"Monthly Occupancy Chart"
+			]]
+		]
 	}
+    
 ]
 
 scheduler_events = {
