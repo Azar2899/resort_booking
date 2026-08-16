@@ -52,3 +52,24 @@ def get_resource_slots(resource, slot_date):
 
 	return {"resource": resource, "capacity": capacity, "booked_slots": booked_slots}
 
+
+
+
+@frappe.whitelist()
+def get_booking_balance(booking):
+	booking_doc = frappe.get_doc("Resort Booking", booking)
+
+	payments = frappe.get_all(
+		"Booking Payment",
+		filters={
+			"booking": booking,
+			"docstatus": ["!=", 2]
+		},
+		fields=["amount"]
+	)
+
+	total_paid = sum(frappe.utils.flt(payment.amount) for payment in payments)
+
+	balance = frappe.utils.flt(booking_doc.grand_total) - total_paid
+
+	return max(balance, 0)

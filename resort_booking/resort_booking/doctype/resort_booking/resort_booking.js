@@ -93,7 +93,7 @@ frappe.ui.form.on("Resort Booking", {
 		if (frm.doc.balance_due > 0 && frm.doc.status == "Checked-out") {
 			frappe.throw(__("Cannot change status to {0} when balance due is {1}", [frm.doc.status, frm.doc.balance_due]));
 		}
-		
+
 		if (frm.doc.check_in && frm.doc.check_out && frm.doc.check_out <= frm.doc.check_in) {
 			frappe.throw(__("Check-out Date must be after Check-in Date"));
 		}
@@ -446,42 +446,59 @@ function set_booking_editability(frm) {
 
 function add_payment_button(frm) {
 
-	frm.remove_custom_button("Payment");
-
-	if (
-		frm.doc.status === "Draft" ||
-		frm.doc.status === "Pre-booked"
-	) {
-		if (frm.doc.grand_total != frm.doc.advance_paid) {
-			frm.add_custom_button(
-				"Payment",
-				function () {
-					frappe.new_doc("Booking Payment", {
-						booking: frm.doc.name,
-						payment_type: "Advance"
-
-					});
-				},
-				"Create"
-			);
-		}
+	// frm.remove_custom_button("Payment");
+	if (frm.doc.status != "Confirmed" && frm.doc.status != "Checked-in") {
+	if (flt(frm.doc.balance_due) > 0) {
+		frappe.call({
+			method: "resort_booking.resort_booking.api.get_booking_balance",
+			args: {
+				booking: frm.doc.name
+			},
+			callback: function (r) {
+				if (r.message && flt(r.message) > 0) {
+					frm.add_custom_button(
+						"Payment",
+						function () {
+							frappe.new_doc("Booking Payment", {
+								booking: frm.doc.name,
+								payment_type: "Advance",
+								amount: flt(r.message)
+							});
+						},
+						"Create"
+					);
+				}
+			}
+		});
 
 		return;
 	}
+	}
 
-	if (frm.doc.status === "Confirmed") {
-
+	if (frm.doc.status === "Confirmed" || frm.doc.status === "Checked-in") {
 		if (flt(frm.doc.balance_due) > 0) {
-			frm.add_custom_button(
-				"Payment",
-				function () {
-					frappe.new_doc("Booking Payment", {
-						booking: frm.doc.name,
-						payment_type: "Balance"
-					});
+			console.log("Balance due is greater than 0, adding Payment button");
+			frappe.call({
+				method: "resort_booking.resort_booking.api.get_booking_balance",
+				args: {
+					booking: frm.doc.name
 				},
-				"Create"
-			);
+				callback: function (r) {
+					if (r.message && flt(r.message) > 0) {
+						frm.add_custom_button(
+							"Payment",
+							function () {
+								frappe.new_doc("Booking Payment", {
+									booking: frm.doc.name,
+									payment_type: "Balance",
+									amount: flt(r.message)
+								});
+							},
+							"Create"
+						);
+					}
+				}
+			});
 		}
 
 		return;
