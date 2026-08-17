@@ -49,6 +49,12 @@ frappe.ui.form.on("Resort Booking", {
 
 	refresh(frm) {
 		set_rooms_read_only(frm);
+		if (!["Draft", "Pre-Booked"].includes(frm.doc.status)) {
+            frm.set_df_property("guests_staying", "read_only", 1);
+        }
+		if (frm.doc.status === "Cancelled") {
+             frm.disable_form();
+        }
 		frm.toggle_display(
 			"rooms",
 			!!frm.doc.check_in && !!frm.doc.check_out
@@ -139,6 +145,11 @@ frappe.ui.form.on("Resort Booking", {
 			});
 		});
 	},
+	after_save(frm) {
+        if (!["Draft", "Pre-Booked"].includes(frm.doc.status)) {
+             frm.disable_form();
+        }
+    }
 
 });
 
@@ -381,6 +392,7 @@ function update_room_rates(frm) {
 
 	});
 }
+
 
 function show_available_rooms(rooms) {
 	if (!rooms.length) {
